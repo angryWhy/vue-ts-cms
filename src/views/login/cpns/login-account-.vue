@@ -14,18 +14,30 @@
 <script lang="ts">
 import { ElForm } from 'element-plus/lib/components'
 import { defineComponent, reactive, ref } from 'vue'
+import localeCache from '@/utils/catch'
+import { useStore } from 'vuex'
 export default defineComponent({
   name: 'LoginAccount',
   setup() {
+    const store = useStore()
     const account = reactive({
-      name: '',
-      password: ''
+      //先取一下看看有没有
+      name: localeCache.getCache('name') ?? '',
+      password: localeCache.getCache('password') ?? ''
     })
     const formRef = ref<InstanceType<typeof ElForm>>()
-    const loginAction = () => {
+    const loginAction = (isKeepWord: boolean) => {
       formRef.value?.validate((valid) => {
-        console.log('正在登陆')
-        console.log(valid)
+        if (valid) {
+          if (isKeepWord) {
+            localeCache.setCache('name', account.name)
+            localeCache.setCache('password', account.password)
+          } else {
+            localeCache.deleteCache('name')
+            localeCache.deleteCache('password')
+          }
+          store.dispatch('loginModule/accountLoginAction', { ...account })
+        }
       })
     }
     const rules = {

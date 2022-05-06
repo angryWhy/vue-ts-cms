@@ -1,8 +1,8 @@
 <template>
   <div class="login-panel">
     <h2 class="title">后台管理系统</h2>
-    <el-tabs type="border-card" class="demo-tabs" stretch>
-      <el-tab-pane>
+    <el-tabs type="border-card" class="demo-tabs" stretch v-model="currentTab">
+      <el-tab-pane name="account">
         <template #label>
           <span class="custom-tabs-label">
             <el-icon><avatar /></el-icon>
@@ -11,7 +11,7 @@
         </template>
         <login-account ref="accountRef" />
       </el-tab-pane>
-      <el-tab-pane label="Config">
+      <el-tab-pane label="Config" name="phone">
         <template #label>
           <span class="custom-tabs-label">
             <el-icon><iphone /></el-icon>
@@ -44,13 +44,19 @@ export default defineComponent({
   setup() {
     const isKeepWord = ref(true)
     const accountRef = ref<InstanceType<typeof loginAccount>>()
+    const currentTab = ref<string>('account')
     const handleLoginClick = () => {
-      console.log('click', accountRef.value?.loginAction())
+      if (currentTab.value === 'account') {
+        console.log('click', accountRef.value?.loginAction(isKeepWord.value))
+      } else {
+        console.log(currentTab.value)
+      }
     }
     return {
       isKeepWord,
       accountRef,
-      handleLoginClick
+      handleLoginClick,
+      currentTab
     }
   }
 })
