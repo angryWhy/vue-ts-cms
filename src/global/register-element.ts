@@ -1,9 +1,33 @@
 import { App } from 'vue'
 import 'element-plus/theme-chalk/index.css'
-import { ElButton, ElTabPane, ElTabs } from 'element-plus'
+import {
+  ElAlert,
+  ElAside,
+  ElButton,
+  ElCheckbox,
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElRadio,
+  ElTabPane,
+  ElTabs,
+  ElLink
+} from 'element-plus'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
-const components = [ElButton, ElTabs, ElTabPane]
+const components = [
+  ElButton,
+  ElTabs,
+  ElTabPane,
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElRadio,
+  ElAlert,
+  ElAside,
+  ElCheckbox,
+  ElLink
+]
 export default function (app: App) {
   for (const cpn of components) {
     app.component(cpn.name, cpn)
