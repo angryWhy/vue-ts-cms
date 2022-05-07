@@ -1,16 +1,20 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import login from '../views/login/login.vue'
+import main from '../views/main/main.vue'
 import localeCache from '@/utils/catch'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'login',
-    component: login
+    redirect: '/login'
   },
   {
     path: '/login',
     component: () => import('@/views/login/login.vue')
+  },
+  {
+    path: '/main',
+    component: () => import('@/views/main/main.vue')
   }
 ]
 
