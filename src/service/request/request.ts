@@ -51,16 +51,16 @@ export class axiosRequest {
         // 执行一下，然后再返回出去，对其进行修改，然后再返回出去
         config = config.interceptors.requestinterceptors(config)
       }
-
-      if (config.showLoading === false) {
-        this.showLoading = config.showLoading
-      }
-
+      //传入为flase，默认不显示loading
       this.instance.request<any, T>(config).then((res) => {
         if (config.interceptors?.responseinterceptors) {
           res = config.interceptors.responseinterceptors(res)
         }
-        this.showLoading = true
+        if (config.showLoading === false) {
+          this.showLoading = config.showLoading
+        } else {
+          this.showLoading = true
+        }
         resolve(res)
       })
     })
