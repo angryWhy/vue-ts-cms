@@ -11,7 +11,10 @@ import {
   ElRadio,
   ElTabPane,
   ElTabs,
-  ElLink
+  ElLink,
+  ElMenu,
+  ElMenuItem,
+  ElMenuItemGroup
 } from 'element-plus'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
@@ -26,7 +29,10 @@ const components = [
   ElAlert,
   ElAside,
   ElCheckbox,
-  ElLink
+  ElLink,
+  ElMenu,
+  ElMenuItem,
+  ElMenuItemGroup
 ]
 export default function (app: App) {
   for (const cpn of components) {
