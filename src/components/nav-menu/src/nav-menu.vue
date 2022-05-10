@@ -2,12 +2,13 @@
   <div class="nav-menu">
     <div class="logo">
       <img src="~@/assets/img/logo.svg" alt="logo" class="img" />
-      <span class="title">vue3+TS</span>
+      <span class="title" v-if="!collapse">vue3+TS</span>
     </div>
     <el-menu
       background-color="#0c2135"
       text-color="#b7bdc3"
       active-text-color="#0a60bd"
+      :collapse="collapse"
     >
       <template v-for="item in userMenus" :key="item.id">
         <template v-if="item.type === 1">
@@ -40,6 +41,12 @@ import { defineComponent, computed } from 'vue'
 import { useStore } from '@/store'
 export default defineComponent({
   name: 'NavMenu',
+  props: {
+    collapse: {
+      type: Boolean,
+      default: false
+    }
+  },
   setup() {
     const store = useStore()
     const userMenus = computed(() => store.state.loginModule.userMenus)
